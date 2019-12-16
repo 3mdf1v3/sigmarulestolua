@@ -1,6 +1,7 @@
 #!/bin/python3
 import yaml
 import glob
+from pathlib import Path
 
 def luaPatterm(value):
 
@@ -39,7 +40,8 @@ def luaPatterm(value):
 
 def main():
 
-    sourcePAthRules = '~/Documents/sigma/'
+    home = str(Path.home())
+    sourcePathRules = home + '/Documents/sigma/rules/'
     source = {
         'apt': 'CommandLine',
         'proxy': 'UserAgent',
@@ -48,13 +50,14 @@ def main():
 
     for directory,extractField in source.items():
 
-        path = sourcePAthRules + directory
-        files = [f for f in glob.glob(path + "**/*.yml", recursive=True)]
-        fileDstName = directory.replace('/', '_') + '_' + extractField + '.txt'
+        path = sourcePathRules + directory
+        filesSrc = [f for f in glob.glob(path + "**/*.yml", recursive=True)]
+        directory = directory.replace('/', '_')
+        fileDstName = directory + '_' + extractField + '.txt'
         fileDst = open(fileDstName,'w') 
 
-        for file in files:        
-            with open(file, 'r') as yamlFile:
+        for fileSrc in filesSrc:    
+            with open(fileSrc, 'r') as yamlFile:
                 dictionaries = yaml.load_all(yamlFile, Loader=yaml.SafeLoader)
                 for dictionary in dictionaries:
                     detection = dictionary.get('detection')
