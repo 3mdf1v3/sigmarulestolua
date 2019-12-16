@@ -68,9 +68,9 @@ def main():
                                   if k2 == extractField: 
                                     if type(v2) == list:
                                         for i in v2:
-                                            fileDst.write(luaPatterm(i))
+                                            fileDst.write(luaPatterm(i) + '\n')
                                     else:   
-                                            fileDst.write(luaPatterm(v2))
+                                            fileDst.write(luaPatterm(v2) + '\n')
         fileDst.close
 
 if __name__== "__main__":
