@@ -6,9 +6,8 @@ from pathlib import Path
 def luaPatterm(value):
 
     value = value.replace('%', '%%')
-    value = value.replace('\\', '\\\\')  
-    value = value.replace(r"'", r"\'")
-    value = value.replace(r'"', r'\"')  
+    value = value.replace(r"'", r"%p")
+    value = value.replace(r'"', r'%p')  
     value = value.replace('#', '%#')  
     value = value.replace('.', '%.')
     value = value.replace(',', '%,')
@@ -18,8 +17,8 @@ def luaPatterm(value):
     value = value.replace('|', '%|')
     value = value.replace('=', '%=')
     value = value.replace('?', '%?')
-    value = value.replace('[', '\[')
-    value = value.replace(']', '\]')
+    value = value.replace('[', '%[')
+    value = value.replace(']', '%]')
     value = value.replace('(', '%(')
     value = value.replace(')', '%)')
     value = value.replace('&', '%&')
@@ -44,7 +43,7 @@ def main():
     sourcePathRules = home + '/Documents/sigma/rules/'
     source = {
         'apt': 'CommandLine',
-        'proxy': 'UserAgent',
+        'proxy': 'c-useragent',
         'windows/process_creation': 'CommandLine'
     }
 
